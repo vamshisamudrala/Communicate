@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+hr { 
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 5px;
+  color: #333333;
+} 
+</style>
+</head>
+<body>
+<div class="container">
+<div class="panel panel-info">
+<div class="panel-heading">
+<b>Suggested Users</b>
+</div>
+<div class="panel-body">
+<ul style="list-style:none">
+<li ng-repeat="toUser in suggestedUsers">
+<hr>
+<img src="http://localhost:8081/CollaborativeMiddlewareProject/getimage?email={{toUser.email}}" alt="Upload Image" height="140px" width="145px"/>
+<table class="table table-bored">
+<tr><td><b>EMAIL_ID:</b></td><td>{{toUser.email}}</td></tr>
+<tr><td><b>NAME:</b></td><td>{{toUser.firstname}} &nbsp; {{toUser.lastname}}</td></tr>
+<tr><td><b>ROLE_OF_USER:</b></td><td>{{toUser.role}}</td></tr>
+<tr><td><button class="btn btn-sm btn-info" ng-click="sendFriendRequest(toUser)">Send Friend Request</button></td><td></td></tr>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

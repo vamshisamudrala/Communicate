@@ -1,0 +1,54 @@
+<div class="panel panel-info">
+<div class="panel-heading">
+<img src="http://localhost:8081/CollaborativeMiddlewareProject/getimage?email={{user.email}}" alt="Upload Image" height="140px" width="145px"/>
+<table class="table table-bored">
+<tr><td><b>Blog Title: </b></td><td>{{blogPost.blogTitle}}<br></td></tr>
+<tr><td><b>Posted On :  </b></td><td>{{blogPost.postedOn | date:'dd-MMMM-yyyy'}}<br></td></tr>
+<tr><td><b>Posted By : </b></td><td> {{blogPost.postedBy.firstname}} &nbsp; {{blogPost.postedBy.lastname}}<br></td></tr>
+<tr><td><b>Email     :   </b></td><td>{{blogPost.postedBy.email}}<br></td></tr>
+</table>
+</div>
+<div class="panel-body">
+<b>Content:</b><br>
+<p ng-bind-html="htmlContent">
+</p>
+<hr>
+<div>
+<a href="#/updateblogpost/{{blogPost.blogPostId}}" ng-show="user.email==blogPost.postedBy.email"><span class="glyphicon glyphicon-pencil">Update</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="" ng-click="updateLikes(blogPost.blogPostId)"><span class="glyphicon glyphicon-thumbs-up" ng-class="isLiked?'liked':'default'"> </span> </a> {{blogPost.likes}} likes<br> 
+</div>
+<br>
+Post Comment<br>
+<div>
+<textarea rows="5" cols="50" ng-model="commentTxt"></textarea>
+<button class="btn btn-md btn-info" ng-show="commentTxt != undefined" ng-click="addBlogComment(commentTxt,blogPost)"><b>SEND</b></button>
+<br>
+<div ng-show="blogComment!=undefined">
+
+{{blogComment.commentTxt}}<br>
+&nbsp;&nbsp;&nbsp;commentedBy :- {{blogComment.commentedBy.firstname}} &nbsp; {{blogComment.commentedBy.lastname}}<br>
+&nbsp;&nbsp;&nbsp;commentedOn :- {{blogComment.commentedOn | date:'dd-MMMM-yyyy:HH:mm:ss'}}<br>
+</div>
+</div>
+<a href="" ng-click="getBlogComments(blogPost.blogPostId)" >View comments</a>
+<br><br>
+<!-- <ul ng-repeat="comment in comments | orderBy:'-commentedOn'" style="list-style:none;">
+<li><span style="color:blue">{{comment.commentTxt}}</span> &nbsp; &nbsp; commented By &nbsp; {{comment.commentedBy.firstname}} &nbsp;{{comment.commentedBy.lastname}} &nbsp; on {{comment.commentedOn | date:'dd-MMMM-yyyy'}}&nbsp;&nbsp;
+<a href="#/updateblogcomment/{{comment.commentId}}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="" ng-click="deleteBlogComment(comment.commentId,blogPost.blogPostId)"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<hr>
+</li>
+</ul> -->
+<table class="table table-bordered">
+<tr ng-repeat="comment in comments | orderBy:'-commentedOn'">
+<td><img src="http://localhost:8081/CollaborativeMiddlewareProject/getimage?email={{comment.commentedBy.email}}" alt="Upload Image" height="40px" width="45px"/></td>
+<td><span style="color:blue">{{comment.commentTxt}}</span> <br>commented By &nbsp; {{comment.commentedBy.firstname}} &nbsp;{{comment.commentedBy.lastname}} &nbsp; on {{comment.commentedOn | date:'dd-MMMM-yyyy'}}</td>
+<td ng-show="user.email == comment.commentedBy.email"><a href="#/updateblogcomment/{{comment.commentId}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+<td ng-show="user.email == comment.commentedBy.email"><a href="" ng-click="deleteBlogComment(comment.commentId,blogPost.blogPostId)"><span class="glyphicon glyphicon-trash"></span></a></td>
+</tr> 
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>

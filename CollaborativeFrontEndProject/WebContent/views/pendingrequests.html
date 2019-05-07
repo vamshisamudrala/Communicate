@@ -1,0 +1,20 @@
+<div class="container">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4>Pending Requests</h4>
+</div>
+<div class="panel-body">
+<ul style="list-style:none">
+<li ng-repeat="request in pendingRequests">
+<hr>
+<img src="http://localhost:8081/CollaborativeMiddlewareProject/getimage?email={{request.fromid.email}}" alt="Upload Image" height="140px" width="145px"/><br>
+<b>Email:</b>{{request.fromid.email}}<br>
+<b>Name:</b>{{request.fromid.firstname}}&nbsp;{{request.fromid.lastname}}<br>
+<b>Mobile No:</b>{{request.fromid.phonenumber}}<br><br>
+<button class="btn btn-info" ng-click="acceptFriendRequest(request)">Accept Friend Request</button>
+<button class="btn btn-danger" ng-click="deleteFriendRequest(request)">Delete Friend Request</button>
+</li>
+</ul>
+</div>
+</div>
+</div>
